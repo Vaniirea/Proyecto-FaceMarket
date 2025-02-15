@@ -65,4 +65,5 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
    - **Sprint Review**: Revisión del incremento al final del sprint.
    - **Sprint Retrospective**: Reflexión sobre el proceso para identificar mejoras.
 
+![Diagrama de la metodologia SCRUM](images/metodologia-scrum.png)
 
