@@ -47,7 +47,23 @@ Desarrollar un sistema basado en reconocimiento facial que identifique a los cli
    - Operativo al menos el 80% del tiempo laboral.
 
 ## Metodología de Desarrollo
-Se utilizará **SCRUM**, una metodología ágil que permite desarrollar el sistema en ciclos iterativos, con entregas incrementales y pruebas constantes. Se organizarán sprints de 2 semanas.
+Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proyectos complejos mediante ciclos iterativos llamados sprints. Cada sprint tiene una duración fija, generalmente de dos semanas, y se enfoca en entregar incrementos funcionales del producto. Los componentes clave de SCRUM incluyen:
+
+1. **Roles**
+   - **Product Owner (Propietario del Producto)**: Gestiona el Product Backlog, priorizando las funcionalidades según el valor para el negocio.
+   - **Scrum Master**: Facilita el proceso SCRUM, eliminando impedimentos y asegurando que el equipo siga las prácticas ágiles.
+   - **Equipo de Desarrollo**: Grupo multidisciplinario responsable de construir el producto.
+
+2. **Artefactos**
+   - **Product Backlog**: Lista priorizada de requisitos y funcionalidades del producto.
+   - **Sprint Backlog**: Conjunto de tareas seleccionadas del Product Backlog para el sprint actual.
+   - **Incremento**: Resultado funcional entregable al final de cada sprint.
+
+3. **Eventos**
+   - **Sprint Planning**: Reunión para planificar el trabajo del próximo sprint.
+   - **Daily Scrum**: Reunión diaria de 15 minutos para sincronizar al equipo.
+   - **Sprint Review**: Revisión del incremento al final del sprint.
+   - **Sprint Retrospective**: Reflexión sobre el proceso para identificar mejoras.
 
 **Tecnologías Utilizadas**
 - **Lenguaje de Programación**: Python
