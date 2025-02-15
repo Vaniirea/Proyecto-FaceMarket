@@ -65,8 +65,4 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
    - **Sprint Review**: Revisión del incremento al final del sprint.
    - **Sprint Retrospective**: Reflexión sobre el proceso para identificar mejoras.
 
-**Tecnologías Utilizadas**
-- **Lenguaje de Programación**: Python
-- **Librerías**: OpenCV para el reconocimiento facial
-- **Base de Datos**: SQL Server
-- **Metodología de Desarrollo**: SCRUM
+
