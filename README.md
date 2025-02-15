@@ -49,7 +49,7 @@ Desarrollar un sistema basado en reconocimiento facial que identifique a los cli
 ## Metodología de Desarrollo
 Se utilizará **SCRUM**, una metodología ágil que permite desarrollar el sistema en ciclos iterativos, con entregas incrementales y pruebas constantes. Se organizarán sprints de 2 semanas.
 
-## Tecnologías Utilizadas
+**Tecnologías Utilizadas**
 - **Lenguaje de Programación**: Python
 - **Librerías**: OpenCV para el reconocimiento facial
 - **Base de Datos**: SQL Server
