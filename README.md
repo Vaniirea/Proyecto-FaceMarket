@@ -64,6 +64,29 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
    - **Daily Scrum**: Reunión diaria de 15 minutos para sincronizar al equipo.
    - **Sprint Review**: Revisión del incremento al final del sprint.
    - **Sprint Retrospective**: Reflexión sobre el proceso para identificar mejoras.
+## Cronograma de Actividades
+Actividad Principal	Subtemas	Fecha Inicio	Fecha Final
+Análisis y Planificación	Definir los requerimientos detallados del sistema.	03/02/2025	16/02/2025
+	Diseñar la arquitectura del sistema y la base de datos.	03/02/2025	16/02/2025
+	Seleccionar tecnologías adecuadas (Python, OpenCV, SQL Server).	03/02/2025	16/02/2025
+Desarrollo del Reconocimiento Facial	Implementar la captura y procesamiento de imágenes.	17/02/2025	16/03/2025
+	Entrenar modelos de reconocimiento facial.	17/02/2025	16/03/2025
+	Pruebas de precisión y mejora del modelo.	17/02/2025	16/03/2025
+Integración con la Base de Datos	Crear la base de datos de clientes y productos.	17/03/2025	30/03/2025
+	Desarrollar la conexión del sistema con la base de datos.	17/03/2025	30/03/2025
+	Implementar consultas de saldo y compras.	17/03/2025	30/03/2025
+Implementación del Módulo de Compras	Integrar el reconocimiento facial con el sistema de pagos.	31/03/2025	13/04/2025
+	Validar la disponibilidad del saldo del cliente.	31/03/2025	13/04/2025
+	Generar reportes de compras y transacciones.	31/03/2025	13/04/2025
+Desarrollo de la Interfaz de Usuario	Crear la interfaz para clientes y administradores.	14/04/2025	27/04/2025
+	Optimizar la usabilidad y experiencia del usuario.	14/04/2025	27/04/2025
+	Realizar pruebas de funcionalidad.	14/04/2025	27/04/2025
+Pruebas y Optimización	Realizar pruebas unitarias e integrales.	28/04/2025	11/05/2025
+	Optimizar el rendimiento y corregir errores.	28/04/2025	11/05/2025
+	Garantizar la seguridad de los datos.	28/04/2025	11/05/2025
+Despliegue y Documentación	Implementar el sistema en un entorno real.	12/05/2025	23/05/2025
+	Capacitar a los administradores de la tienda.	12/05/2025	23/05/2025
+	Redactar documentación técnica y manuales de usuario.	12/05/2025	23/05/2025
 
 ![Diagrama de la metodologia SCRUM](images/metodologia-scrum.png)
 
