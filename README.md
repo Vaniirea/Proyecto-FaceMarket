@@ -53,7 +53,7 @@ Desarrollar un sistema basado en reconocimiento facial que identifique a los cli
 ### Diagrama de Base de Datos
 ### Diagrama de Actividades
 ### Metodología SCRUM
-![Diagramas en el repositorio](https://github.com/Vaniirea/DiagramasFaceMarket)
+[Diagramas en el repositorio](https://github.com/Vaniirea/DiagramasFaceMarket)
 
 
 
