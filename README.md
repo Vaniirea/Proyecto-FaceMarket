@@ -75,3 +75,5 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
 [Diagrama de BD](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/Diagrama%20de%20BD.png)
 
 [Diagrama de Actividades](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20actividades.png)
+
+## Cronograma de actividades del proyecto
