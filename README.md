@@ -46,17 +46,7 @@ Desarrollar un sistema basado en reconocimiento facial que identifique a los cli
 5. **Disponibilidad**
    - Operativo al menos el 80% del tiempo laboral.
 
-## Diagramas del Proyecto
-
-### Diagrama de Casos de Uso
-### Diagrama de Clases
-### Diagrama de Base de Datos
-### Diagrama de Actividades
 ### Metodología SCRUM
-[Diagramas en el repositorio](https://github.com/Vaniirea/DiagramasFaceMarket)
-
-
-
 ## Metodología de Desarrollo
 Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proyectos complejos mediante ciclos iterativos llamados sprints. Cada sprint tiene una duración fija, generalmente de dos semanas, y se enfoca en entregar incrementos funcionales del producto. Los componentes clave de SCRUM incluyen:
 
@@ -78,3 +68,10 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
 
 ![Diagrama de la metodologia SCRUM](images/metodologia-scrum.png)
 
+## Diagramas del Proyecto
+
+### Diagrama de Casos de Uso
+### Diagrama de Clases
+### Diagrama de Base de Datos
+### Diagrama de Actividades
+[Diagramas en el repositorio](https://github.com/Vaniirea/DiagramasFaceMarket)
