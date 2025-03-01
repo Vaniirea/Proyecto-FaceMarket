@@ -68,7 +68,7 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
 ![Diagrama de la metodologia SCRUM](images/metodologia-scrum.png)
 
 ## Diagramas del Proyecto
-[Diagrama de Casos de Uso](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20casos%20de%20uso.png)](https://github.com/Vaniirea/Proyecto-FaceMarket)
+[Diagrama de Casos de Uso](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20casos%20de%20uso.png)[!(https://github.com/Vaniirea/Proyecto-FaceMarket)]
 
 [Diagrama de Clases](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20clases.png)](https://github.com/Vaniirea/Proyecto-FaceMarket)
 
