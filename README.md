@@ -71,7 +71,11 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
 [Cronograma de Actividades](https://github.com/users/Vaniirea/projects/1)
 
 ## Diagramas del Proyecto
-🔹 [Diagrama de Casos de Uso](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20casos%20de%20uso.png)  
-🔹 [Diagrama de Clases](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20clases.png)  
-🔹 [Diagrama de BD](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/Diagrama%20de%20BD.png)  
-🔹 [Diagrama de Actividades](https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/Diagrama%20de%20actividades%20corregido.png)  
+### Diagrama de Casos de Uso
+(https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20casos%20de%20uso.png)  
+### Diagrama de Clases
+(https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/diagrama%20de%20clases.png)  
+### Diagrama de BD
+(https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/Diagrama%20de%20BD.png)  
+### Diagrama de Actividades
+(https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/Diagrama%20de%20actividades%20corregido.png)  
