@@ -5,3 +5,6 @@
 
 ## Diagrama de Clases
 ![Diagrama de Clases](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/images/diagrama%20de%20clases.png)
+
+## Diagrama de Actividades
+![Diagrama de Clases](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/images/Diagrama%20de%20actividades%20corregido.png)
