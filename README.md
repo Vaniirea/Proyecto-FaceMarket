@@ -68,8 +68,10 @@ Se utilizará **SCRUM**, una metodología ágil que facilita la gestión de proy
 ![Diagrama de la metodologia SCRUM](images/metodologia-scrum.png)
 
 ## Cronograma de actividades del proyecto
-#### Cronograma de Actividades
+#### Kanban
 https://github.com/users/Vaniirea/projects/1
+#### Cronograma de Actividades
+
 
 ## Diagramas del Proyecto
 #### Diagrama de Casos de Uso
