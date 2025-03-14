@@ -78,5 +78,5 @@ https://github.com/users/Vaniirea/projects/1/views/4
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Diagramas.md
 
 #### Diagrama de BD
-https://github.com/Vaniirea/DiagramasFaceMarket/blob/main/Diagrama%20de%20BD.png
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/DiagramaBD.md
 
