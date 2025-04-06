@@ -1,210 +1,170 @@
-# main.py
 import tkinter as tk
 from tkinter import messagebox, simpledialog, filedialog
 import random
-import face
-face.register_face("Cliente1")
+import face_recognition
+import cv2
+import os
+import numpy as np
+import glob
+import time
+from conexion import obtener_conexion_gestion_usuario, obtener_conexion_productos
 
+# Configuracion
+RUTA_FACES = "faces"
+PRIMARY_COLOR = "#3F51B5"
+ACCENT_COLOR = "#FF9800"
+BG_COLOR = "#FAFAFA"
+HEADER_FG = "#FFFFFF"
+BUTTON_FG = "#FFFFFF"
+ERROR_BG = "#F44336"
 
-# Paleta de colores y estilos
-PRIMARY_COLOR = "#3F51B5"  # Azul índigo
-ACCENT_COLOR = "#FF9800"  # Naranja
-BG_COLOR = "#FAFAFA"  # Fondo claro
-HEADER_FG = "#FFFFFF"  # Texto blanco
-BUTTON_FG = "#FFFFFF"  # Texto blanco
-ERROR_BG = "#F44336"  # Rojo para botones de advertencia
-
-# Fuentes
 HEADER_FONT = ("Helvetica", 26, "bold")
 TITLE_FONT = ("Helvetica", 20, "bold")
 LABEL_FONT = ("Helvetica", 16)
 BUTTON_FONT = ("Helvetica", 16, "bold")
 TEXT_FONT = ("Helvetica", 14)
 
+clientes_rostros = {}
+productos_db = {}
 
-class SelfCheckoutApp(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("Tienda de Autocobro")
+def precargar_rostros():
+    for carpeta in os.listdir(RUTA_FACES):
+        ruta = os.path.join(RUTA_FACES, carpeta)
+        if os.path.isdir(ruta) and carpeta.isdigit():
+            id_cliente = int(carpeta)
+            encodings = []
+            for archivo in glob.glob(os.path.join(ruta, "*.jpg")) + glob.glob(os.path.join(ruta, "*.jpeg")):
+                img = face_recognition.load_image_file(archivo)
+                cods = face_recognition.face_encodings(img)
+                if cods:
+                    encodings.append(cods[0])
+            if encodings:
+                clientes_rostros[id_cliente] = encodings
 
-        # Configurar para pantalla completa y salir con Esc
-        self.bind("<Escape>", lambda e: self.attributes("-fullscreen", False))
+def precargar_productos():
+    global productos_db
+    productos_db.clear()
+    try:
+        conn = obtener_conexion_productos()
+        cursor = conn.cursor()
+        cursor.execute("SELECT Codigo, Nombre, Precio FROM Productos")
+        for fila in cursor.fetchall():
+            productos_db[fila.Codigo] = (fila.Nombre, float(fila.Precio))
+        conn.close()
+    except Exception as e:
+        print("Error al cargar productos:", e)
 
-        # Variables compartidas
-        self.cart = []  # Lista de productos (tuplas: (nombre, precio, cantidad))
-        self.total = 0.0
+def identificar_cliente_por_rostro():
+    cam = cv2.VideoCapture(0)
+    print("Verificando rostro...")
+    for _ in range(3):
+        time.sleep(1)
+        ret, frame = cam.read()
+        if not ret:
+            break
+        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        ubicaciones = face_recognition.face_locations(rgb)
+        codificaciones = face_recognition.face_encodings(rgb, ubicaciones)
+        for cod_actual in codificaciones:
+            for id_cliente, lista_encodings in clientes_rostros.items():
+                distancias = face_recognition.face_distance(lista_encodings, cod_actual)
+                if distancias.size > 0 and np.min(distancias) < 0.6:
+                    cam.release()
+                    cv2.destroyAllWindows()
+                    return id_cliente
+        cv2.imshow("Verificando...", frame)
+        if cv2.waitKey(2000) & 0xFF == ord('q'):
+            break
+    cam.release()
+    cv2.destroyAllWindows()
+    return None
 
-        # Catálogo de productos (simulado)
-        self.products = {
-            "001": ("Manzana", 1.0),
-            "002": ("Banana", 0.5),
-            "003": ("Leche", 1.5),
-            "004": ("Pan", 2.0)
-        }
-
-        # Contenedor para las páginas
-        self.container = tk.Frame(self, bg=BG_COLOR)
-        self.container.pack(fill="both", expand=True)
-
-        # Diccionario para almacenar las páginas
-        self.frames = {}
-        for F in (ProductPage, PaymentPage, TicketPage):
-            frame = F(parent=self.container, controller=self)
-            self.frames[F] = frame
-            frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame(ProductPage)
-
-    def show_frame(self, page_class):
-        """Muestra la página solicitada."""
-        frame = self.frames[page_class]
-        frame.tkraise()
-        if hasattr(frame, "update_page"):
-            frame.update_page()
-
-    def reset(self):
-        """Reinicia el carrito y el total."""
-        self.cart = []
-        self.total = 0.0
-
-
-# --- Página de Escaneo de Productos ---
 class ProductPage(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent, bg=BG_COLOR)
         self.controller = controller
-
-        # Cabecera
         header = tk.Frame(self, bg=PRIMARY_COLOR)
         header.pack(fill=tk.X)
-        header_label = tk.Label(header, text="Escanear Productos", font=HEADER_FONT,
-                                bg=PRIMARY_COLOR, fg=HEADER_FG)
-        header_label.pack(side=tk.LEFT, padx=20, pady=10)
-
-        # Contenido principal
+        tk.Label(header, text="Escanear Productos", font=HEADER_FONT,
+                 bg=PRIMARY_COLOR, fg=HEADER_FG).pack(side=tk.LEFT, padx=20, pady=10)
         content = tk.Frame(self, bg=BG_COLOR)
         content.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-
-        # Botones superiores
         buttons_frame = tk.Frame(content, bg=BG_COLOR)
         buttons_frame.grid(row=0, column=0, columnspan=2, pady=5, sticky="nsew")
-
-        self.scan_button = tk.Button(buttons_frame, text="Escanear Producto", font=BUTTON_FONT,
-                                     bg=ACCENT_COLOR, fg=BUTTON_FG, command=self.scan_product, relief=tk.RAISED, bd=3)
-        self.scan_button.pack(side=tk.LEFT, padx=(0, 10))
-
-        self.remove_button = tk.Button(buttons_frame, text="Eliminar Producto", font=BUTTON_FONT,
-                                       bg=ACCENT_COLOR, fg=BUTTON_FG, command=self.remove_product, relief=tk.RAISED,
-                                       bd=3)
-        self.remove_button.pack(side=tk.LEFT, padx=(0, 10))
-
-        self.clear_button = tk.Button(buttons_frame, text="Vaciar Carrito", font=BUTTON_FONT,
-                                      bg=ERROR_BG, fg=BUTTON_FG, command=self.clear_cart, relief=tk.RAISED, bd=3)
-        self.clear_button.pack(side=tk.LEFT)
-
-        # Carrito de compras
+        tk.Button(buttons_frame, text="Escanear Producto", font=BUTTON_FONT,
+                  bg=ACCENT_COLOR, fg=BUTTON_FG, command=self.scan_product).pack(side=tk.LEFT, padx=(0, 10))
+        tk.Button(buttons_frame, text="Eliminar Producto", font=BUTTON_FONT,
+                  bg=ACCENT_COLOR, fg=BUTTON_FG, command=self.remove_product).pack(side=tk.LEFT, padx=(0, 10))
+        tk.Button(buttons_frame, text="Vaciar Carrito", font=BUTTON_FONT,
+                  bg=ERROR_BG, fg=BUTTON_FG, command=self.clear_cart).pack(side=tk.LEFT)
         cart_frame = tk.LabelFrame(content, text="Carrito de Compras", font=TITLE_FONT,
                                    bg=BG_COLOR, fg=PRIMARY_COLOR, padx=10, pady=10)
         cart_frame.grid(row=1, column=0, columnspan=2, pady=10, sticky="nsew")
-
-        self.cart_listbox = tk.Listbox(cart_frame, font=TEXT_FONT, bd=2, relief=tk.GROOVE)
+        self.cart_listbox = tk.Listbox(cart_frame, font=TEXT_FONT)
         self.cart_listbox.pack(fill=tk.BOTH, expand=True)
-
-        # Total y botón Siguiente
         self.total_label = tk.Label(content, text="Total: $0.00", font=("Helvetica", 18, "bold"), bg=BG_COLOR)
         self.total_label.grid(row=2, column=0, pady=5, sticky="w")
-
-        self.next_button = tk.Button(content, text="Siguiente", font=BUTTON_FONT,
-                                     bg=PRIMARY_COLOR, fg=BUTTON_FG,
-                                     command=lambda: controller.show_frame(PaymentPage), relief=tk.RAISED, bd=3)
-        self.next_button.grid(row=2, column=1, pady=5, sticky="e")
-
+        tk.Button(content, text="Siguiente", font=BUTTON_FONT,
+                  bg=PRIMARY_COLOR, fg=BUTTON_FG, command=lambda: controller.show_frame(PaymentPage)).grid(row=2, column=1, pady=5, sticky="e")
         content.grid_rowconfigure(1, weight=1)
         content.grid_columnconfigure(0, weight=1)
         content.grid_columnconfigure(1, weight=1)
 
     def scan_product(self):
-        code = simpledialog.askstring("Escanear Producto", "Ingrese el código del producto:")
+        code = simpledialog.askstring("Código del producto", "Ingrese el código:")
         if code:
             code = code.strip()
-            if code in self.controller.products:
-                product, price = self.controller.products[code]
-                qty = simpledialog.askinteger("Cantidad", f"Ingrese la cantidad de {product}:", minvalue=1,
-                                              initialvalue=1)
+            if code in productos_db:
+                name, price = productos_db[code]
+                qty = simpledialog.askinteger("Cantidad", f"¿Cuántos {name}?", minvalue=1, initialvalue=1)
                 if not qty:
-                    qty = 1
-                self.controller.cart.append((product, price, qty))
+                    return
+                self.controller.cart.append((name, price, qty))
                 self.controller.total += price * qty
-                self.cart_listbox.insert(tk.END, f"{product} x{qty} - ${price * qty:.2f}")
+                self.cart_listbox.insert(tk.END, f"{name} x{qty} - ${price * qty:.2f}")
                 self.total_label.config(text=f"Total: ${self.controller.total:.2f}")
             else:
                 messagebox.showerror("Error", "Producto no encontrado.")
 
     def remove_product(self):
-        selection = self.cart_listbox.curselection()
-        if selection:
-            index = selection[0]
-            product, price, qty = self.controller.cart.pop(index)
-            self.controller.total -= price * qty
-            self.cart_listbox.delete(index)
+        idx = self.cart_listbox.curselection()
+        if idx:
+            item = self.controller.cart.pop(idx[0])
+            self.controller.total -= item[1] * item[2]
+            self.cart_listbox.delete(idx)
             self.total_label.config(text=f"Total: ${self.controller.total:.2f}")
-        else:
-            messagebox.showwarning("Atención", "Seleccione un producto para eliminar.")
 
     def clear_cart(self):
-        if messagebox.askyesno("Confirmar", "¿Está seguro de vaciar el carrito?"):
+        if messagebox.askyesno("Confirmar", "¿Vaciar carrito?"):
             self.controller.reset()
             self.update_page()
 
     def update_page(self):
         self.cart_listbox.delete(0, tk.END)
         self.total_label.config(text=f"Total: ${self.controller.total:.2f}")
-        for product, price, qty in self.controller.cart:
-            self.cart_listbox.insert(tk.END, f"{product} x{qty} - ${price * qty:.2f}")
+        for name, price, qty in self.controller.cart:
+            self.cart_listbox.insert(tk.END, f"{name} x{qty} - ${price * qty:.2f}")
 
-
-# --- Página de Métodos de Pago ---
 class PaymentPage(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent, bg=BG_COLOR)
         self.controller = controller
-
-        # Cabecera
         header = tk.Frame(self, bg=PRIMARY_COLOR)
         header.pack(fill=tk.X)
-        header_label = tk.Label(header, text="Métodos de Pago", font=HEADER_FONT,
-                                bg=PRIMARY_COLOR, fg=HEADER_FG)
-        header_label.pack(side=tk.LEFT, padx=20, pady=10)
-
-        # Contenido principal
+        tk.Label(header, text="Métodos de Pago", font=HEADER_FONT,
+                 bg=PRIMARY_COLOR, fg=HEADER_FG).pack(side=tk.LEFT, padx=20, pady=10)
         content = tk.Frame(self, bg=BG_COLOR)
         content.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-
         self.total_label = tk.Label(content, text="", font=LABEL_FONT, bg=BG_COLOR)
-        self.total_label.grid(row=0, column=0, columnspan=2, pady=5, sticky="nsew")
-
-        # Botón para Face ID (real)
-        self.faceid_button = tk.Button(content, text="Pago Face ID", font=BUTTON_FONT,
-                                       bg=ACCENT_COLOR, fg=BUTTON_FG,
-                                       command=lambda: self.process_payment("Face ID"), relief=tk.RAISED, bd=3)
-        self.faceid_button.grid(row=1, column=0, padx=5, pady=5, sticky="ew")
-
-        # Botón para pago con Tarjeta (simulado)
-        self.card_button = tk.Button(content, text="Pago con Tarjeta", font=BUTTON_FONT,
-                                     bg=ACCENT_COLOR, fg=BUTTON_FG,
-                                     command=lambda: self.process_payment("Tarjeta"), relief=tk.RAISED, bd=3)
-        self.card_button.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
-
-        self.qr_button = tk.Button(content, text="Pago con QR", font=BUTTON_FONT,
-                                   bg=ACCENT_COLOR, fg=BUTTON_FG,
-                                   command=lambda: self.process_payment("QR"), relief=tk.RAISED, bd=3)
-        self.qr_button.grid(row=2, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
-
-        self.finalize_button = tk.Button(content, text="Finalizar Compra", font=BUTTON_FONT,
-                                         bg=ERROR_BG, fg=BUTTON_FG,
-                                         command=self.finalize_purchase, relief=tk.RAISED, bd=3)
-        self.finalize_button.grid(row=3, column=0, columnspan=2, pady=10, sticky="ew")
-
+        self.total_label.grid(row=0, column=0, columnspan=2, pady=5)
+        tk.Button(content, text="Pago Face ID", font=BUTTON_FONT,
+                  bg=ACCENT_COLOR, fg=BUTTON_FG, command=self.pago_con_faceid).grid(row=1, column=0, padx=5, pady=5, sticky="ew")
+        tk.Button(content, text="Pago con Tarjeta", font=BUTTON_FONT,
+                  bg=ACCENT_COLOR, fg=BUTTON_FG, command=lambda: self.simular_pago("Tarjeta")).grid(row=1, column=1, padx=5, pady=5, sticky="ew")
+        tk.Button(content, text="Pago con QR", font=BUTTON_FONT,
+                  bg=ACCENT_COLOR, fg=BUTTON_FG, command=lambda: self.simular_pago("QR")).grid(row=2, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
+        tk.Button(content, text="Finalizar Compra", font=BUTTON_FONT,
+                  bg=ERROR_BG, fg=BUTTON_FG, command=self.finalizar).grid(row=3, column=0, columnspan=2, pady=10, sticky="ew")
         for i in range(4):
             content.grid_rowconfigure(i, weight=1)
         content.grid_columnconfigure(0, weight=1)
@@ -213,67 +173,59 @@ class PaymentPage(tk.Frame):
     def update_page(self):
         self.total_label.config(text=f"Total a pagar: ${self.controller.total:.2f}")
 
-    def process_payment(self, method):
-        if method == "Face ID":
-            # Llamada a la función real de reconocimiento facial del módulo face
-            result = face.authenticate_face_real()
-            if result:
-                messagebox.showinfo("Pago Exitoso", "Pago con Face ID aprobado.")
+    def pago_con_faceid(self):
+        id_cliente = identificar_cliente_por_rostro()
+        if id_cliente is None:
+            messagebox.showwarning("Error", "No se pudo verificar tu identidad.")
+            return
+        try:
+            conexion = obtener_conexion_gestion_usuario()
+            cursor = conexion.cursor()
+            cursor.execute("SELECT Saldo FROM Clientes WHERE IdCliente = ?", (id_cliente,))
+            fila = cursor.fetchone()
+            if not fila:
+                messagebox.showerror("Error", "Cliente no encontrado en base de datos.")
+                return
+            saldo_actual = float(fila.Saldo)
+            if saldo_actual >= self.controller.total:
+                nuevo_saldo = saldo_actual - self.controller.total
+                cursor.execute("UPDATE Clientes SET Saldo = ? WHERE IdCliente = ?", (nuevo_saldo, id_cliente))
+                conexion.commit()
+                messagebox.showinfo("Pago Exitoso", f"Pago aprobado. Nuevo saldo: ${nuevo_saldo:.2f}")
+                self.controller.show_frame(TicketPage)
             else:
-                messagebox.showwarning("Error", "El pago con Face ID falló. Intente nuevamente.")
-        else:
-            messagebox.showinfo(method, f"Iniciando pago con {method}...")
-            self.after(2000, lambda: self.show_payment_result(method))
+                messagebox.showerror("Saldo insuficiente", "No tienes suficiente saldo para completar la compra.")
+        except Exception as e:
+            messagebox.showerror("Error de conexión", str(e))
 
-    def show_payment_result(self, method):
-        success = random.choice([True, True, False])
-        if success:
-            messagebox.showinfo("Pago Exitoso", f"Pago con {method} aprobado.")
-        else:
-            messagebox.showwarning("Error", f"El pago con {method} falló. Intente nuevamente.")
+    def simular_pago(self, metodo):
+        messagebox.showinfo(metodo, f"Procesando pago con {metodo}...")
+        self.after(2000, lambda: messagebox.showinfo("Éxito", f"Pago con {metodo} aprobado."))
 
-    def finalize_purchase(self):
+    def finalizar(self):
         if self.controller.total == 0:
             messagebox.showwarning("Carrito Vacío", "No hay productos en el carrito.")
         else:
             self.controller.show_frame(TicketPage)
 
-
-# --- Página del Ticket (Recibo) ---
 class TicketPage(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent, bg=BG_COLOR)
         self.controller = controller
-
-        # Cabecera
         header = tk.Frame(self, bg=PRIMARY_COLOR)
         header.pack(fill=tk.X)
-        header_label = tk.Label(header, text="Ticket de Compra", font=HEADER_FONT,
-                                bg=PRIMARY_COLOR, fg=HEADER_FG)
-        header_label.pack(side=tk.LEFT, padx=20, pady=10)
-
-        # Contenido principal
+        tk.Label(header, text="Ticket de Compra", font=HEADER_FONT,
+                 bg=PRIMARY_COLOR, fg=HEADER_FG).pack(side=tk.LEFT, padx=20, pady=10)
         content = tk.Frame(self, bg=BG_COLOR)
         content.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-
-        content.grid_rowconfigure(0, weight=1)
-        content.grid_columnconfigure(0, weight=1)
-
-        self.ticket_text = tk.Text(content, font=TEXT_FONT, bg="white",
-                                   bd=2, relief=tk.GROOVE, state=tk.DISABLED)
-        self.ticket_text.grid(row=0, column=0, sticky="nsew")
-
+        self.ticket_text = tk.Text(content, font=TEXT_FONT, bg="white", state=tk.DISABLED)
+        self.ticket_text.pack(fill=tk.BOTH, expand=True)
         buttons_frame = tk.Frame(content, bg=BG_COLOR)
-        buttons_frame.grid(row=1, column=0, sticky="e", pady=5)
-
-        self.save_button = tk.Button(buttons_frame, text="Guardar Ticket", font=BUTTON_FONT,
-                                     bg=ACCENT_COLOR, fg=BUTTON_FG, command=self.save_ticket, relief=tk.RAISED, bd=3)
-        self.save_button.pack(side=tk.LEFT, padx=5)
-
-        self.finish_button = tk.Button(buttons_frame, text="Finalizar", font=BUTTON_FONT,
-                                       bg=PRIMARY_COLOR, fg=BUTTON_FG, command=self.finish_purchase, relief=tk.RAISED,
-                                       bd=3)
-        self.finish_button.pack(side=tk.LEFT, padx=5)
+        buttons_frame.pack(anchor="e", pady=5)
+        tk.Button(buttons_frame, text="Guardar Ticket", font=BUTTON_FONT,
+                  bg=ACCENT_COLOR, fg=BUTTON_FG, command=self.save_ticket).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="Finalizar", font=BUTTON_FONT,
+                  bg=PRIMARY_COLOR, fg=BUTTON_FG, command=self.finish_purchase).pack(side=tk.LEFT, padx=5)
 
     def update_page(self):
         self.ticket_text.config(state=tk.NORMAL)
@@ -282,22 +234,49 @@ class TicketPage(tk.Frame):
         for product, price, qty in self.controller.cart:
             self.ticket_text.insert(tk.END, f"{product} x{qty}: ${price * qty:.2f}\n")
         self.ticket_text.insert(tk.END, f"\nTotal a pagar: ${self.controller.total:.2f}\n")
-        self.ticket_text.insert(tk.END, "\n¡Gracias por su compra!")
+        self.ticket_text.insert(tk.END, "\n\n¡Gracias por su compra!")
         self.ticket_text.config(state=tk.DISABLED)
 
     def save_ticket(self):
         file_path = filedialog.asksaveasfilename(defaultextension=".txt",
                                                  filetypes=[("Archivos de texto", "*.txt")])
         if file_path:
-            with open(file_path, "w", encoding="utf-8") as file:
-                file.write(self.ticket_text.get("1.0", tk.END))
-            messagebox.showinfo("Guardado", "El ticket ha sido guardado exitosamente.")
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(self.ticket_text.get("1.0", tk.END))
+            messagebox.showinfo("Guardado", "Ticket guardado exitosamente.")
 
     def finish_purchase(self):
         self.controller.reset()
         self.controller.show_frame(ProductPage)
 
+class SelfCheckoutApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Tienda de Autocobro")
+        self.bind("<Escape>", lambda e: self.attributes("-fullscreen", False))
+        self.cart = []
+        self.total = 0.0
+        self.container = tk.Frame(self, bg=BG_COLOR)
+        self.container.pack(fill="both", expand=True)
+        self.frames = {}
+        for F in (ProductPage, PaymentPage, TicketPage):
+            frame = F(parent=self.container, controller=self)
+            self.frames[F] = frame
+            frame.grid(row=0, column=0, sticky="nsew")
+        self.show_frame(ProductPage)
+
+    def show_frame(self, page_class):
+        frame = self.frames[page_class]
+        frame.tkraise()
+        if hasattr(frame, "update_page"):
+            frame.update_page()
+
+    def reset(self):
+        self.cart = []
+        self.total = 0.0
 
 if __name__ == "__main__":
+    precargar_rostros()
+    precargar_productos()
     app = SelfCheckoutApp()
     app.mainloop()
