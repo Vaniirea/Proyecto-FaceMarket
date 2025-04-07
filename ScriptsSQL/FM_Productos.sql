@@ -9,10 +9,10 @@ GO
 USE FM_Productos;
 GO
 
--- Crear tabla con campo de Código
+-- Crear tabla con campo de CÃ³digo
 CREATE TABLE Productos (
     IdProducto INT PRIMARY KEY IDENTITY(1,1),
-    Codigo VARCHAR(10) UNIQUE NOT NULL,   -- Aquí va el código como '001', '002', etc.
+    Codigo VARCHAR(10) UNIQUE NOT NULL,   -- AquÃ­ va el cÃ³digo como '001', '002', etc.
     Nombre VARCHAR(100) NOT NULL,
     Precio DECIMAL(10, 2) NOT NULL,
     Inventario INT NOT NULL
@@ -29,7 +29,7 @@ INSERT INTO Productos (Codigo, Nombre, Precio, Inventario) VALUES
 ('005', 'Jugo de Naranja', 2.50, 20),
 ('006', 'Huevos (12u)', 3.20, 35),
 ('007', 'Arroz (1kg)', 1.90, 60),
-('008', 'Azúcar (1kg)', 1.70, 45),
+('008', 'AzÃºcar (1kg)', 1.70, 45),
 ('009', 'Aceite (1L)', 3.80, 22),
 ('010', 'Galletas', 1.50, 50);
 GO
