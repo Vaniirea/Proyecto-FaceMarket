@@ -59,3 +59,11 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba_por_foto
 
 ## Imagenes
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes.md
+
+## Script De BD
+#### FM_Clientes
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Clientes.sql
+#### FM_Compras
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Compras.sql
+#### FM_Productos
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Productos.sql
