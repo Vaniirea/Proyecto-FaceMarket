@@ -81,16 +81,4 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Diagramas.md
 #### Diagrama de BD
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/DiagramaBD.md
 
-## Código
-#### Conexion.py
-https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/conexion.py
-#### Diseño.py
-https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/dise%C3%B1o.py
-#### Cara.py
-https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/face.py
-#### Main.py
-https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/main.py
-#### Pueba.py
-https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba.py
-#### Pueba por foto.py
-https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba_por_foto.py
+
