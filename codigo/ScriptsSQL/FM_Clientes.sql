@@ -14,15 +14,6 @@ CREATE TABLE Clientes (
 );
 GO
 
---Ver clientes
-SELECT IdCliente, Nombre, Saldo
-FROM Clientes;
-GO
-
---primer cliente 
-USE FM_Clientes;
-GO
-
 INSERT INTO Clientes (Nombre, Saldo)
 VALUES ('Vani Rea', 100.00);
 GO
