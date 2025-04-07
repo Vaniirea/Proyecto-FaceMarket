@@ -40,3 +40,17 @@ Se utilizaron tableros tipo Kanban en GitHub Projects para llevar el control de 
 - Creación y conexión de bases de datos.
 - Validación de saldo y ejecución de pagos.
 - Generación de reportes visuales y tickets.
+
+## Código
+#### Conexion.py
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/conexion.py
+#### Diseño.py
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/dise%C3%B1o.py
+#### Cara.py
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/face.py
+#### Main.py
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/main.py
+#### Pueba.py
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba.py
+#### Pueba por foto.py
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba_por_foto.py
