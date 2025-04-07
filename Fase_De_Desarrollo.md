@@ -52,9 +52,9 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/dise%C3%B1o.py
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/face.py
 #### Main.py
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/main.py
-#### Pueba.py
+#### Prueba.py
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba.py
-#### Pueba por foto.py
+#### Prueba por foto.py
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba_por_foto.py
 
 ## Imagenes
