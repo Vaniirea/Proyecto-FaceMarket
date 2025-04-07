@@ -65,5 +65,5 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Compras.
 #### FM_Productos
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Productos.sql
 
-## Imagenes
+## Imagenes (Entrenando el Modelo)
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes.md
