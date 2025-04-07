@@ -56,3 +56,6 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/main.py
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba.py
 #### Pueba por foto.py
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba_por_foto.py
+
+## Imagenes
+https://github.com/Vaniirea/Proyecto-FaceMarket/tree/main/Imagenes%20de%20Clases
