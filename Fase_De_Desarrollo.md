@@ -57,9 +57,6 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba.py
 #### Prueba por foto.py
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/codigo/prueba_por_foto.py
 
-## Imagenes
-https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes.md
-
 ## Script De BD
 #### FM_Clientes
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Clientes.sql
@@ -67,3 +64,6 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Clientes
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Compras.sql
 #### FM_Productos
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/ScriptsSQL/FM_Productos.sql
+
+## Imagenes
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes.md
