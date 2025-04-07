@@ -81,4 +81,5 @@ https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Diagramas.md
 #### Diagrama de BD
 https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/DiagramaBD.md
 
-
+## Fase De Desarrollo
+https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Fase_De_Desarrollo.md
