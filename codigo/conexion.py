@@ -1,3 +1,7 @@
+# Volver al README:
+# https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/README.md
+
+
 import pyodbc
 
 def obtener_conexion_gestion_usuario():
