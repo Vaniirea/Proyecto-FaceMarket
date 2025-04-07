@@ -31,14 +31,6 @@ class SelfCheckoutApp(tk.Tk):
         self.cart = []  # Lista de productos (tuplas: (nombre, precio, cantidad))
         self.total = 0.0
 
-        # Catálogo de productos (simulado)
-        self.products = {
-            "001": ("Manzana", 1.0),
-            "002": ("Banana", 0.5),
-            "003": ("Leche", 1.5),
-            "004": ("Pan", 2.0)
-        }
-
         # Contenedor para las páginas
         self.container = tk.Frame(self, bg=BG_COLOR)
         self.container.pack(fill="both", expand=True)
