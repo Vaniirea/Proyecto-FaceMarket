@@ -25,3 +25,12 @@
 
 ![Imagen 5](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20productos/productos_5.JPG)
 
+## Reconocimiento
+![Imagen 1](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20reconocimiento%20facial/reconocimiento_1.JPG)
+![Imagen 2](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20reconocimiento%20facial/reconocimiento_2.JPG)
+![Imagen 3](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20reconocimiento%20facial/reconocimiento_3.JPG)
+![Imagen 4](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20reconocimiento%20facial/reconocimiento_4.JPG)
+![Imagen 5](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20reconocimiento%20facial/reconocimiento_5.JPG)
+
+
+
