@@ -16,7 +16,7 @@
 
 ## Gestion de Productos
 ![Imagen 1](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20productos/productos_1.JPG)
-![Imagen 2](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20productos/productos_2.JPG?raw=true)
+![Imagen 2](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20productos/productos_2.JPG)
 
 
 
