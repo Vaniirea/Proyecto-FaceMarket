@@ -15,7 +15,7 @@
 ![Imagen 5](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20interfaz%20de%20compra/interfaz_5.JPG)
 
 ## Gestion de Productos
-![Imagen 1](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/e12cfa8c7fc61a05f430f03325b28b3116161165/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20productos/productos_1.JPG)
+![Imagen 1](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20productos/productos_1.JPG)
 ![Imagen 2](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20productos/productos_2.JPG?raw=true)
 
 
