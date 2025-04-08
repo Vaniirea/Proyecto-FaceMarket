@@ -1,6 +1,7 @@
 [Volver al README](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Fase_De_Desarrollo.md)
 
 ## Gestion de Pagos
+**Imagen 1**
 ![Imagen 1](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20pagos/pagos_1.JPG)
 ![Imagen 2](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20pagos/pagos_2.JPG)
 ![Imagen 3](https://github.com/Vaniirea/Proyecto-FaceMarket/blob/main/Imagenes%20de%20Clases/Clase%20de%20gesti%C3%B3n%20de%20pagos/pagos_3.JPG)
